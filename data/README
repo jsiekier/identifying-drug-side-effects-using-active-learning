@@ -1,0 +1,13 @@
+drug_searchterm_map.csv contains drugs and all corresponding search terms for the drug tweets.
+
+tweet_db.db (sqlite db)
+    tables:
+        'tweets'    (tweet_id,date,selection_round)    Contains tweets with drug search term mentioned. Results based on selection round 0 tweets. Tweets of round 1 are selected at a different time.
+        'subsequent_tweets' (sub_tweet_id,tweet_id,date,selection_round)   Corresponding tweets (in the next 7 days) of the same author who mentioned a search term.
+        'drug_annotations'  (tweet_id,userid,answer)    Mturk annotation of selection round 0. Annotation if the author himself took the drug.
+        'se_annotations'    (tweet_id,userid,answer,experiment_id)    Mturk annotation of selection round 0. Annotation of the the self-experiential side effect or "None" if the author mentioned none. 
+									experiment_id = 1 : result of one stage annotation. experiment_id = 2 : result of two stage annotation.
+        'drug_predictions'  (tweet_id,result,round,model_name) Result of 'drug_annotations'. Prediction if the author himself took the drug.
+        'se_predictions'    (tweet_id,result,experiment_id,round,model_name) Result of 'se_annotations'. Prediction if the author mention a self-experiential side effect. 
+										(tweet_id can be related to a tweet from 'tweets' or sub_tweet_id from 'subsequent_tweets').
+										experiment_id = 1 : result of one stage annotation. experiment_id = 2 : result of two stage annotation.
